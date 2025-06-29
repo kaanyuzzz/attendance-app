@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>University of Beylikduzu Attendance</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #71b7e6, #9b59b6);
+      padding: 40px;
+      max-width: 700px;
+      margin: auto;
+      border-radius: 15px;
+      color: #333;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      background-color: white;
+    }
+
+    .header-bg {
+      position: relative;
+      color: white;
+      font-size: 2.5rem;
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      z-index: 0;
+    }
+
+    .header-bg::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image: url('/static/university.png');
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.6);
+      opacity: 0.4;
+      z-index: -1;
+      border-radius: 15px;
+    }
+
+    button {
+      background-color: #8e44ad;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(142, 68, 173, 0.4);
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #732d91;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1.5px solid #ccc;
+      border-radius: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: #8e44ad;
+      outline: none;
+      box-shadow: 0 0 8px rgba(142, 68, 173, 0.5);
+    }
+
+    select {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1.5px solid #ccc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 10px;
+      margin-top: 10px;
+    }
+
+    th {
+      background-color: #8e44ad;
+      color: white;
+      padding: 10px;
+      border-radius: 10px 10px 0 0;
+    }
+
+    td {
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover td {
+      background-color: #dcd0f7;
+    }
+
+    .present {
+      background-color: #27ae60;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    .absent {
+      background-color: #c0392b;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 12px;
+      font-weight: 600;
+      display: inline-block;
+    }
+
+    p.total {
+      font-size: 16px;
+      color: #555;
+      margin-top: 10px;
+    }
+
+    hr {
+      margin-top: 30px;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="header-bg">🎓 University of <span style="color:#007BFF;">Beylikduzu</span> Attendance</h1>
+
+  <form method="get" action="/">
+    <label for="filter">Filter by status:</label>
+    <select name="filter" id="filter" onchange="this.form.submit()">
+      <option value="all" {% if current_filter == 'all' %}selected{% endif %}>All</option>
+      <option value="present" {% if current_filter == 'present' %}selected{% endif %}>Present</option>
+      <option value="absent" {% if current_filter == 'absent' %}selected{% endif %}>Absent</option>
+    </select>
+  </form>
+
+  <p><strong>Attendance Percentage: {{ attendance_percentage }}%</strong></p>
+
+  <form method="post">
+    <label>Name:</label><br>
+    <input type="text" name="name" required><br>
+
+    <label>ID:</label><br>
+    <input type="text" name="student_id" required><br>
+
+    {% if show_last_name %}
+    <label>Surname:</label><br>
+    <input type="text" name="last_name" required><br>
+    {% endif %}
+
+    <label>Status:</label><br>
+    <select name="status" required>
+      <option value="present">Present</option>
+      <option value="absent">Absent</option>
+    </select><br><br>
+
+    {% if error %}
+    <p style="color:red;">{{ error }}</p>
+    {% endif %}
+
+    <button type="submit">Add</button>
+  </form>
+
+  <h2>Attendance List</h2>
+
+  <p class="total">Total Students Marked: {{ attendance|length }}</p>
+
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Status</th>
+    </tr>
+    {% for name, sid, email, status in attendance %}
+    <tr>
+      <td>{{ name }}</td>
+      <td>{{ sid }}</td>
+      <td>{{ email }}</td>
+      <td class="{{ status }}">{{ status.upper() }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <h2>Instructor</h2>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Branch</th>
+    </tr>
+    <tr>
+      <td>{{ teacher_info[0] }}</td>
+      <td>{{ teacher_info[1] }}</td>
+      <td>{{ teacher_info[2] }}</td>
+    </tr>
+  </table>
+
+  <hr>
+
+</body>
+</html>
