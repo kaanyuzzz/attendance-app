@@ -25,19 +25,46 @@
       overflow: hidden;
       margin-bottom: 20px;
       z-index: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
 
     .header-bg::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background-image: url('/static/university.png');
-      background-size: cover;
-      background-position: center;
-      filter: brightness(0.6);
-      opacity: 0.4;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23667eea" opacity="0.1"/><circle cx="20" cy="20" r="10" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="80" r="15" fill="%23ffffff" opacity="0.1"/><rect x="60" y="10" width="20" height="20" fill="%23ffffff" opacity="0.1"/></svg>');
+      background-size: 100px 100px;
+      opacity: 0.3;
       z-index: -1;
       border-radius: 15px;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      gap: 15px;
+    }
+
+    .stat-card {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+      flex: 1;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
     }
 
     button {
@@ -48,157 +75,318 @@
       border-radius: 25px;
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(142, 68, 173, 0.4);
-      transition: background-color 0.3s ease;
+      transition: all 0.3s ease;
+      font-weight: 600;
     }
 
     button:hover {
       background-color: #732d91;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(142, 68, 173, 0.5);
+    }
+
+    .form-section {
+      background: #f8f9fa;
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 25px;
+      border: 1px solid #e9ecef;
+    }
+
+    .form-section h3 {
+      margin-top: 0;
+      color: #495057;
+      margin-bottom: 20px;
     }
 
     input, select {
       width: 100%;
-      padding: 10px;
-      border: 1.5px solid #ccc;
+      padding: 12px;
+      border: 2px solid #e9ecef;
       border-radius: 8px;
       margin-top: 5px;
       margin-bottom: 15px;
       box-sizing: border-box;
       transition: border-color 0.3s ease;
+      font-size: 14px;
     }
 
     input:focus, select:focus {
       border-color: #8e44ad;
       outline: none;
-      box-shadow: 0 0 8px rgba(142, 68, 173, 0.5);
+      box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
     }
 
-    select {
-      padding: 10px;
+    .filter-form {
       margin-bottom: 20px;
-      border-radius: 8px;
-      border: 1.5px solid #ccc;
     }
 
     table {
       width: 100%;
       border-collapse: separate;
-      border-spacing: 0 10px;
-      margin-top: 10px;
+      border-spacing: 0;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-top: 20px;
     }
 
     th {
-      background-color: #8e44ad;
+      background: linear-gradient(135deg, #667eea, #764ba2);
       color: white;
-      padding: 10px;
-      border-radius: 10px 10px 0 0;
+      padding: 15px 12px;
+      text-align: left;
+      font-weight: 600;
     }
 
     td {
-      background-color: #f9f9f9;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
+      background-color: #ffffff;
+      padding: 12px;
+      border-bottom: 1px solid #e9ecef;
     }
 
     tr:hover td {
-      background-color: #dcd0f7;
+      background-color: #f8f9fa;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
     }
 
     .present {
-      background-color: #27ae60;
+      background: linear-gradient(135deg, #28a745, #20c997);
       color: white;
-      padding: 6px 10px;
-      border-radius: 12px;
+      padding: 6px 12px;
+      border-radius: 20px;
       font-weight: 600;
+      font-size: 0.85rem;
       display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .absent {
-      background-color: #c0392b;
+      background: linear-gradient(135deg, #dc3545, #fd7e14);
       color: white;
-      padding: 6px 10px;
-      border-radius: 12px;
+      padding: 6px 12px;
+      border-radius: 20px;
       font-weight: 600;
+      font-size: 0.85rem;
       display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    p.total {
+    .teacher-info {
+      background: linear-gradient(135deg, #17a2b8, #6f42c1);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 25px;
+      box-shadow: 0 4px 12px rgba(23, 162, 184, 0.3);
+    }
+
+    .teacher-info h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+    }
+
+    .error-message {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #f5c6cb;
+      margin-bottom: 15px;
+    }
+
+    .success-message {
+      background: #d4edda;
+      color: #155724;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #c3e6cb;
+      margin-bottom: 15px;
+    }
+
+    .total-count {
       font-size: 16px;
-      color: #555;
-      margin-top: 10px;
+      color: #6c757d;
+      margin-bottom: 10px;
+      font-weight: 500;
     }
 
-    hr {
-      margin-top: 30px;
-      border: none;
-      border-top: 1px solid #ddd;
+    .polymorphism-demo {
+      background: #e3f2fd;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 25px 0;
+      border-left: 4px solid #2196f3;
+    }
+
+    .polymorphism-demo h3 {
+      color: #1976d2;
+      margin-top: 0;
+    }
+
+    .role-badge {
+      background: #2196f3;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+
+    @media (max-width: 600px) {
+      .stats-container {
+        flex-direction: column;
+      }
+
+      .header-bg {
+        font-size: 2rem;
+        padding: 30px 15px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h1 class="header-bg">🎓 University of <span style="color:#007BFF;">Beylikduzu</span> Attendance</h1>
+  <h1 class="header-bg">🎓 University of <span style="color:#00bcd4;">Beylikduzu</span> Attendance</h1>
 
-  <form method="get" action="/">
-    <label for="filter">Filter by status:</label>
-    <select name="filter" id="filter" onchange="this.form.submit()">
-      <option value="all" {% if current_filter == 'all' %}selected{% endif %}>All</option>
-      <option value="present" {% if current_filter == 'present' %}selected{% endif %}>Present</option>
-      <option value="absent" {% if current_filter == 'absent' %}selected{% endif %}>Absent</option>
-    </select>
-  </form>
+  <div class="stats-container">
+    <div class="stat-card">
+      <div class="stat-number">{{ attendance_percentage }}%</div>
+      <div class="stat-label">Attendance Rate</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ attendance|length }}</div>
+      <div class="stat-label">Total Students</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ attendance|selectattr('3', 'equalto', 'present')|list|length }}</div>
+      <div class="stat-label">Present Today</div>
+    </div>
+  </div>
 
-  <p><strong>Attendance Percentage: {{ attendance_percentage }}%</strong></p>
+  <div class="form-section">
+    <h3>📊 Filter Students</h3>
+    <form method="get" action="/" class="filter-form">
+      <label for="filter">Filter by status:</label>
+      <select name="filter" id="filter" onchange="this.form.submit()">
+        <option value="all" {% if current_filter == 'all' %}selected{% endif %}>All Students</option>
+        <option value="present" {% if current_filter == 'present' %}selected{% endif %}>Present Only</option>
+        <option value="absent" {% if current_filter == 'absent' %}selected{% endif %}>Absent Only</option>
+      </select>
+    </form>
+  </div>
 
-  <form method="post">
-    <label>Name:</label><br>
-    <input type="text" name="name" required><br>
+  <div class="form-section">
+    <h3>➕ Add New Student</h3>
+    <form method="post">
+      <label>Full Name:</label>
+      <input type="text" name="name" value="{{ previous_name or '' }}" required placeholder="Enter student's full name">
 
-    <label>ID:</label><br>
-    <input type="text" name="student_id" required><br>
+      <label>Student ID:</label>
+      <input type="text" name="student_id" value="{{ previous_student_id or '' }}" required placeholder="Enter unique student ID">
 
-    {% if show_last_name %}
-    <label>Surname:</label><br>
-    <input type="text" name="last_name" required><br>
-    {% endif %}
+      {% if show_last_name %}
+      <label>Surname (Required):</label>
+      <input type="text" name="last_name" required placeholder="Enter student's surname">
+      {% endif %}
 
-    <label>Status:</label><br>
-    <select name="status" required>
-      <option value="present">Present</option>
-      <option value="absent">Absent</option>
-    </select><br><br>
+      <label>Attendance Status:</label>
+      <select name="status" required>
+        <option value="present" {% if previous_status == 'present' %}selected{% endif %}>Present ✅</option>
+        <option value="absent" {% if previous_status == 'absent' %}selected{% endif %}>Absent ❌</option>
+      </select>
 
-    {% if error %}
-    <p style="color:red;">{{ error }}</p>
-    {% endif %}
+      {% if error %}
+      <div class="error-message">
+        <strong>Error:</strong> {{ error }}
+      </div>
+      {% endif %}
 
-    <button type="submit">Add</button>
-  </form>
+      <button type="submit">Add Student</button>
+    </form>
+  </div>
 
-  <h2>Attendance List</h2>
+  <div class="polymorphism-demo">
+    <h3> Polymorphism in Action</h3>
+    <p>This system demonstrates Object-Oriented Programming concepts:</p>
+    <ul>
+      <li><strong>Abstract Classes:</strong> Person class defines common interface</li>
+      <li><strong>Inheritance:</strong> Student and Teacher inherit from Person</li>
+      <li><strong>Polymorphism:</strong> Different implementations of get_info() and get_role()</li>
+      <li><strong>Encapsulation:</strong> Private methods and data protection</li>
+    </ul>
+  </div>
 
-  <p class="total">Total Students Marked: {{ attendance|length }}</p>
+  <h2> Student Attendance List</h2>
+  <p class="total-count">Showing {{ attendance|length }} student(s) 
+    {% if current_filter != 'all' %}(filtered by {{ current_filter }}){% endif %}
+  </p>
 
   <table>
     <tr>
-      <th>Name</th>
-      <th>ID</th>
-      <th>Email</th>
-      <th>Status</th>
+      <th> Name</th>
+      <th> Student ID</th>
+      <th> Email</th>
+      <th> Status</th>
     </tr>
     {% for name, sid, email, status in attendance %}
     <tr>
-      <td>{{ name }}</td>
+      <td>{{ name }} <span class="role-badge">STUDENT</span></td>
       <td>{{ sid }}</td>
       <td>{{ email }}</td>
-      <td class="{{ status }}">{{ status.upper() }}</td>
+      <td><span class="{{ status }}">{{ status.upper() }}</span></td>
     </tr>
     {% endfor %}
   </table>
 
-  <h2>Instructor</h2>
-  <p>{{ teacher_info_string }}</p>
+  <div class="teacher-info">
+    <h3> Course Instructor</h3>
+    <p>{{ teacher_info_string }} <span class="role-badge">TEACHER</span></p>
+    <p><em>This demonstrates polymorphism - both Teacher and Student objects use the same get_info() method interface but with different implementations.</em></p>
+  </div>
 
-  <hr>
+  <script>
+    // Simple JavaScript to demonstrate interactivity
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.querySelector('form[method="post"]');
+      const nameInput = form.querySelector('input[name="name"]');
+      const idInput = form.querySelector('input[name="student_id"]');
+
+      // Add some basic validation feedback
+      form.addEventListener('submit', function(e) {
+        if (nameInput.value.trim().length < 2) {
+          alert('Please enter a valid name (at least 2 characters)');
+          e.preventDefault();
+          return;
+        }
+
+        if (idInput.value.trim().length < 1) {
+          alert('Please enter a valid student ID');
+          e.preventDefault();
+          return;
+        }
+      });
+
+      // Add visual feedback for form interactions
+      const inputs = form.querySelectorAll('input, select');
+      inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+          this.style.transform = 'scale(1.02)';
+          this.style.transition = 'transform 0.2s ease';
+        });
+
+        input.addEventListener('blur', function() {
+          this.style.transform = 'scale(1)';
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
